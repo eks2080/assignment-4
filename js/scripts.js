@@ -7,7 +7,7 @@ var mapOptions = {
     container: 'map-container', // container ID
     style: 'mapbox://styles/mapbox/light-v11', // style URL
     center: [-74.00011310930516, 40.72415607434748], // starting position [lng, lat]
-    zoom: 11, // starting zoom,
+    zoom: 10.5, // starting zoom,
 }
 
 // instantiate the map
@@ -23,7 +23,7 @@ bookstoredata.forEach(function (bookstoreRecord) {
 
     var color
 
-    // use if statements to assign colors based on neighborhood
+    // use if statements to assign colors based on borough
 
     if (bookstoreRecord.Borough === 'Manhattan') {
         color = '#9932CC'
@@ -106,38 +106,84 @@ map.on('load', function () {
         }
     })
 })
-    map.on('click', 'borough-boundaries-fill', (e) => {
-        // listen for a click on a specific button and use flyTo to change the map's camera view.
-        $('#queens-button').on('click', function () {
-            map.flyTo({
-                center: [-73.89387763569168, 40.73104567408716],
-                zoom: 9,
-                duration: 1500
-            })
-        })
 
-        // listen for a click on a specific button and use fitBounds to change the map's camera view.
-        $('#manhattan-button').on('click', function () {
-            map.flyTo({
-                center: [-74.15234, 40.57932],
-                zoom: 9,
-                duration: 1500
-            })
-        })
+// this is a variable to store the id of the feature that is currently being hovered.
+/* let hoveredPolygonId = null 
 
-        $('#bronx-button').on('click', function () {
-            map.flyTo({
-                center: [-73.91579103266682, 40.81437684228872],
-                zoom: 9,
-                duration: 1500
-            })
-        })
+// whenever the mouse moves on the 'borough-boundaries-fill' layer, we check the id of the feature it is on top of, and set featureState for that feature.  The featureState we set is hover:true or hover:false
+map.on('mousemove', 'borough-boundaries-fill', (e) => {
+    // don't do anything if there are no features from this layer under the mouse pointer
+    if (e.features.length > 0) {
+        // if hoveredPolygonId already has an id in it, set the featureState for that id to hover: false
+        if (hoveredPolygonId !== null) {
+            map.setFeatureState(
+                { source: 'borough-boundaries', id: hoveredPolygonId },
+                { hover: false }
+            );
+        }
 
-        $('#brooklyn-button').on('click', function () {
-            map.flyTo({
-                center: [-73.95743869447674, 40.644049824373106],
-                zoom: 9,
-                duration: 1500
-            })
+        // set hoveredPolygonId to the id of the feature currently being hovered
+        hoveredPolygonId = e.features[0].id;
+
+        // set the featureState of this feature to hover:true
+        map.setFeatureState(
+            { source: 'borough-boundaries', id: hoveredPolygonId },
+            { hover: true }
+        );
+
+        // make the cursor a pointer to let the user know it is clickable
+        map.getCanvas().style.cursor = 'pointer'
+
+        // resets the feature state to the default (nothing is hovered) when the mouse leaves the 'borough-boundaries-fill' layer
+        map.on('mouseleave', 'borough-boundaries-fill', () => {
+            // set the featureState of the previous hovered feature to hover:false
+            if (hoveredPolygonId !== null) {
+                map.setFeatureState(
+                    { source: 'borough-boundaries', id: hoveredPolygonId },
+                    { hover: false }
+                );
+            }
+
+            // clear hoveredPolygonId
+            hoveredPolygonId = null;
+            
+            // set the cursor back to default
+            map.getCanvas().style.cursor = ''
+        });
+
+    }
+}); */
+map.on('click', 'button-50', (e) => {
+    // listen for a click on a specific button and use flyTo to change the map's camera view.
+    $('#queens-button').on('click', function () {
+        map.flyTo({
+            center: [-73.89387763569168, 40.73104567408716],
+            zoom: 9,
+            duration: 1500
         })
+    })
+
+    $('#manhattan-button').on('click', function () {
+        map.flyTo({
+            center: [-74.15234, 40.57932],
+            zoom: 9,
+            duration: 1500
+        })
+    })
+
+    $('#bronx-button').on('click', function () {
+        map.flyTo({
+            center: [-73.91579103266682, 40.81437684228872],
+            zoom: 9,
+            duration: 1500
+        })
+    })
+
+    $('#brooklyn-button').on('click', function () {
+        map.flyTo({
+            center: [-73.95743869447674, 40.644049824373106],
+            zoom: 9,
+            duration: 1500
+        })
+    })
 })

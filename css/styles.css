@@ -28,7 +28,7 @@ body {
     left: 20px;
     z-index: 1;
     width: 450px;
-    background: #57a2db;
+    background: #42b2f8b7;
     padding: 10px;
     border-radius: 15px;
 }
@@ -44,8 +44,7 @@ body {
     font-size: 15.5px;
     text-align: left;
     padding: 10px;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
-    line-height: 22px;
+    line-height: 20px;
     margin-bottom: 10px;
     color: white;
     border-radius: 1px; 
@@ -71,6 +70,7 @@ body {
     color: #ffffff;
     letter-spacing: .5px;
     margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -78,7 +78,6 @@ body {
 }
 
 /*button style */
-
 #sidebar .button-50 {
     appearance: button;
     background-color: #000;
