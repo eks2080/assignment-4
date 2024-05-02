@@ -111,21 +111,21 @@ map.on('load', function () {
 $('#queens-button').on('click', function () {
     map.flyTo({
         center: [-73.89387763569168, 40.73104567408716],
-        zoom: 9,
+        zoom: 11,
         duration: 1500
     })
 })
 $('#manhattan-button').on('click', function () {
     map.flyTo({
-        center: [-74.15234, 40.57932],
-        zoom: 9,
+        center: [-73.97369874032192, 40.77132321682226],
+        zoom: 11,
         duration: 1500
     })
 })
 $('#bronx-button').on('click', function () {
     map.flyTo({
         center: [-73.91579103266682, 40.81437684228872],
-        zoom: 9,
+        zoom: 11,
         duration: 1500
     })
 })
@@ -133,7 +133,7 @@ $('#bronx-button').on('click', function () {
 $('#brooklyn-button').on('click', function () {
     map.flyTo({
         center: [-73.95743869447674, 40.644049824373106],
-        zoom: 9,
+        zoom: 11,
         duration: 1500
     })
 })
