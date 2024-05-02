@@ -43,12 +43,12 @@ body {
 #sidebar p {
     font-size: 15.5px;
     text-align: left;
-    /* padding: 10px; */
-    /* box-shadow: 0 1px 2px rgb(0 0 0 / 10%); */
+    padding: 10px;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
     line-height: 22px;
     margin-bottom: 10px;
     color: white;
-    /* border-radius: 1px; */
+    border-radius: 1px; 
 }
 
 #sidebar .header {
@@ -57,9 +57,10 @@ body {
 
 #sidebar .source-code-link {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 10px;
     color: #ffffff;
     line-height: 10px;
+    margin-top: 5px;
     margin-bottom: 1px;
     text-decoration-line: underline;
 }
@@ -70,7 +71,10 @@ body {
     color: #ffffff;
     letter-spacing: .5px;
     margin-bottom: 10px;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 /*button style */
@@ -100,6 +104,7 @@ body {
     -webkit-user-select: none;
     vertical-align: middle;
     white-space: nowrap;
+    
 }
 
 .button-50:focus {

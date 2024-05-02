@@ -2,6 +2,7 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiZWtzMjA4MCIsImEiOiJjbHVsdWNmbTExNGg0MmtsZHVlOHN2Zzd5In0.wEYw-sKV39S4NkqO8CDQBw';
 
+
 var mapOptions = {
     container: 'map-container', // container ID
     style: 'mapbox://styles/mapbox/light-v11', // style URL
@@ -11,6 +12,7 @@ var mapOptions = {
 
 // instantiate the map
 const map = new mapboxgl.Map(mapOptions);
+
 
 // add a navitation control
 const nav = new mapboxgl.NavigationControl();
@@ -55,3 +57,87 @@ bookstoredata.forEach(function (bookstoreRecord) {
         .addTo(map);
 })
 
+map.on('load', function () {
+
+    // add a geojson source for the borough boundaries
+    map.addSource('borough-boundaries', {
+        type: 'geojson',
+        data: 'data/borough-boundaries-simplified.geojson',
+        generateId: true // this will add an id to each feature, this is necessary if we want to use featureState (see below)
+    })
+
+    // first add the fill layer, using a match expression to give each a unique color based on its boro_code property
+    map.addLayer({
+        id: 'borough-boundaries-fill',
+        type: 'fill',
+        source: 'borough-boundaries',
+        paint: {
+            'fill-color': [
+                'match',
+                ['get', 'boro_code'],
+                '1',
+                '#f4cae4',
+                '2',
+                '#cbd5e8',
+                '3',
+                '#fdcdac',
+                '4',
+                '#b3e2cd',
+                '5',
+                '#e6f5c9',
+                '#ccc'
+            ],
+            // use a case expression to set the opacity of a polygon based on featureState
+            'fill-opacity': [
+                'case',
+                ['boolean', ['feature-state', 'hover'], false],
+                1,  // opacity when hover is false
+                0.5 // opacity when hover is true
+            ]
+        }
+    })
+    // add borough outlines after the fill layer, so the outline is "on top" of the fill
+    map.addLayer({
+        id: 'borough-boundaries-line',
+        type: 'line',
+        source: 'borough-boundaries',
+        paint: {
+            'line-color': '#6b6b6b'
+        }
+    })
+})
+    map.on('click', 'borough-boundaries-fill', (e) => {
+        // listen for a click on a specific button and use flyTo to change the map's camera view.
+        $('#queens-button').on('click', function () {
+            map.flyTo({
+                center: [-73.89387763569168, 40.73104567408716],
+                zoom: 9,
+                duration: 1500
+            })
+        })
+
+        // listen for a click on a specific button and use fitBounds to change the map's camera view.
+        $('#manhattan-button').on('click', function () {
+            map.flyTo({
+                center: [-74.15234, 40.57932],
+                zoom: 9,
+                duration: 1500
+            })
+        })
+
+        $('#bronx-button').on('click', function () {
+            map.flyTo({
+                center: [-73.91579103266682, 40.81437684228872],
+                zoom: 9,
+                duration: 1500
+            })
+        })
+
+        $('#brooklyn-button').on('click', function () {
+            map.flyTo({
+                center: [-73.95743869447674, 40.644049824373106],
+                zoom: 9,
+                duration: 1500
+            })
+        })
+})
