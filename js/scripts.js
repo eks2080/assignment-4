@@ -54,3 +54,4 @@ bookstoredata.forEach(function (bookstoreRecord) {
         .setPopup(popup)
         .addTo(map);
 })
+
