@@ -83,8 +83,8 @@ map.on('load', function () {
                 '#fdcdac',
                 '4',
                 '#b3e2cd',
-                '5',
-                '#e6f5c9',
+/*                 '5',
+                '#e6f5c9', */
                 '#ccc'
             ],
             // use a case expression to set the opacity of a polygon based on featureState
