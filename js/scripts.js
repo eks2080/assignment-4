@@ -103,6 +103,7 @@ map.on('load', function () {
         source: 'borough-boundaries',
         paint: {
             'line-color': '#6b6b6b',
+        }
     })
 })
 // map.on('click', 'button-50', (e) => {
